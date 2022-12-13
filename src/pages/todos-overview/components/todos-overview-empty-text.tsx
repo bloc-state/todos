@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography } from "@mui/material"
 
 export function TodosOverviewEmptyText() {
   return (
@@ -15,5 +15,5 @@ export function TodosOverviewEmptyText() {
     >
       No todos found with the selected filters
     </Typography>
-  );
+  )
 }

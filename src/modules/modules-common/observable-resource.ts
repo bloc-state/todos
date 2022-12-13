@@ -1,8 +1,8 @@
-import { Cubit } from "@bloc-state/bloc";
+import { Cubit } from "@bloc-state/bloc"
 
 export abstract class ObservableResource<T> extends Cubit<T> {
   constructor(initialState: T) {
-    super(initialState);
+    super(initialState)
   }
 
   /* override all bloc observer methods since we don't want them being used by a BlocObserver */

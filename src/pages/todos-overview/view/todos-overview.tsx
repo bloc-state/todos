@@ -12,55 +12,59 @@ import {
   Button,
   Snackbar,
   Container,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+} from "@mui/material"
+import Icon from "@mui/material/Icon"
 import {
   TodosOverviewBloc,
   TodosOverviewSubscriptionRequested,
   TodosOverviewTodoCompletionToggled,
   TodosOverviewTodoDeleted,
   TodosOverviewUndoDeletionRequested,
-} from "../bloc";
-import { useNavigate } from "react-router-dom";
-import { TodosOverviewOptionsButton } from "../components/todos-overview-options-button";
-import { TodosOverviewFilterButton } from "../components/todos-overview-filter-button";
-import { TodosOverviewEmptyText } from "../components/todos-overview-empty-text";
-import { useMemo, useState } from "react";
-import { TodosOverviewFilter } from "../model";
-import { Todo } from "../../../modules/todos/domain/model/todo";
-import { BlocProvider, useBloc, BlocListener } from "@bloc-state/react-bloc";
+} from "../bloc"
+import { useNavigate } from "react-router-dom"
+import { TodosOverviewOptionsButton } from "../components/todos-overview-options-button"
+import { TodosOverviewFilterButton } from "../components/todos-overview-filter-button"
+import { TodosOverviewEmptyText } from "../components/todos-overview-empty-text"
+import { useMemo, useState } from "react"
+import { TodosOverviewFilter } from "../model"
+import { Todo } from "../../../modules/todos/domain/model/todo"
+import { BlocProvider, useBloc, BlocListener } from "@bloc-state/react-bloc"
 
 export default function TodosOverviewPage() {
   return (
     <BlocProvider
       bloc={[TodosOverviewBloc]}
       onCreate={(get) => {
-        get(TodosOverviewBloc).add(new TodosOverviewSubscriptionRequested());
+        get(TodosOverviewBloc).add(new TodosOverviewSubscriptionRequested())
       }}
     >
       <TodosOverviewView />
     </BlocProvider>
-  );
+  )
 }
 
 export function TodosOverviewView() {
-  const [isSnackbarOpen, openSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [isSnackbarOpen, openSnackbar] = useState(false)
+  const [snackbarMessage, setSnackbarMessage] = useState("")
 
   const [filteredTodos, { add }] = useBloc(TodosOverviewBloc, {
-    selector: ({ todos, filter }) => todos.filter((todo) => todoFilterMap(todo, filter)),
+    selector: ({ todos, filter }) =>
+      todos.filter((todo) => todoFilterMap(todo, filter)),
     suspend: false,
-  });
+  })
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleCloseSnackbar = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleCloseSnackbar = (
+    event: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
     if (reason === "clickaway") {
-      return;
+      return
     }
 
-    openSnackbar(false);
-  };
+    openSnackbar(false)
+  }
 
   const action = useMemo(() => {
     return (
@@ -69,15 +73,15 @@ export function TodosOverviewView() {
           color="secondary"
           size="small"
           onClick={(e) => {
-            handleCloseSnackbar(e);
-            add(new TodosOverviewUndoDeletionRequested());
+            handleCloseSnackbar(e)
+            add(new TodosOverviewUndoDeletionRequested())
           }}
         >
           UNDO
         </Button>
       </>
-    );
-  }, []);
+    )
+  }, [])
 
   return (
     <BlocListener
@@ -86,13 +90,13 @@ export function TodosOverviewView() {
         return (
           previous.data.lastDeletedTodo !== current.data.lastDeletedTodo &&
           current.data.lastDeletedTodo != undefined
-        );
+        )
       }}
       listener={(get, state) => {
-        const deletedTodo = state.data.lastDeletedTodo!;
-        setSnackbarMessage(`Todo "${deletedTodo.title}" deleted.`);
-        openSnackbar(false); // close snackbar if already open
-        openSnackbar(true); // open snackbar
+        const deletedTodo = state.data.lastDeletedTodo!
+        setSnackbarMessage(`Todo "${deletedTodo.title}" deleted.`)
+        openSnackbar(false) // close snackbar if already open
+        openSnackbar(true) // open snackbar
       }}
     >
       <AppBar position="fixed">
@@ -108,7 +112,7 @@ export function TodosOverviewView() {
         {filteredTodos.length > 0 ? (
           <List sx={{ paddingY: (theme) => theme.spacing(8) }}>
             {filteredTodos.map((todo) => {
-              const labelId = `checkbox-list-label-${todo.id}`;
+              const labelId = `checkbox-list-label-${todo.id}`
               return (
                 <ListItem
                   key={todo.id}
@@ -119,7 +123,7 @@ export function TodosOverviewView() {
                       aria-label="delete"
                       onClick={() => add(new TodosOverviewTodoDeleted(todo))}
                     >
-                      <DeleteIcon />
+                      <Icon>delete</Icon>
                     </IconButton>
                   }
                   disablePadding
@@ -136,8 +140,8 @@ export function TodosOverviewView() {
                           add(
                             new TodosOverviewTodoCompletionToggled(
                               todo,
-                              !todo.isCompleted
-                            )
+                              !todo.isCompleted,
+                            ),
                           )
                         }
                       />
@@ -145,12 +149,14 @@ export function TodosOverviewView() {
                     <ListItemText
                       id={labelId}
                       primary={todo.title}
-                      sx={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+                      sx={{
+                        textDecoration: todo.isCompleted ? "line-through" : "",
+                      }}
                       onClick={() => navigate(`/edit/${todo.id}`)}
                     />
                   </ListItemButton>
                 </ListItem>
-              );
+              )
             })}
           </List>
         ) : (
@@ -166,8 +172,12 @@ export function TodosOverviewView() {
         sx={{ bottom: { xs: 100, sm: 100 } }}
       />
     </BlocListener>
-  );
+  )
 }
 
 export const todoFilterMap = (todo: Todo, filter: TodosOverviewFilter) =>
-  filter === "all" ? true : filter === "completed" ? todo.isCompleted : !todo.isCompleted;
+  filter === "all"
+    ? true
+    : filter === "completed"
+    ? todo.isCompleted
+    : !todo.isCompleted

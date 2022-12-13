@@ -1,1 +1,1 @@
-export type TodosOverviewFilter = "all" | "completed" | "incompleted";
+export type TodosOverviewFilter = "all" | "completed" | "incompleted"

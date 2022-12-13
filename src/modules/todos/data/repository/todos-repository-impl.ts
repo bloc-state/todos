@@ -1,28 +1,28 @@
-import { Todo } from "../../domain/model";
-import { TodosRepository } from "../../domain/repository/todos-repository";
-import type { TodosResource } from "../resource";
+import { Todo } from "../../domain/model"
+import { TodosRepository } from "../../domain/repository/todos-repository"
+import type { TodosResource } from "../resource"
 
 export type TodosRepositoryProps = {
-  todosResource: TodosResource;
-};
+  todosResource: TodosResource
+}
 
 export class TodosRepositoryImpl implements TodosRepository {
   #todosResource: TodosResource
 
-  constructor ( { todosResource }: TodosRepositoryProps ) {
+  constructor({ todosResource }: TodosRepositoryProps) {
     this.#todosResource = todosResource
   }
 
-  getTodos = () => this.#todosResource.getTodos();
+  getTodos = () => this.#todosResource.getTodos()
 
-  getTodo = (id: string) => this.#todosResource.getTodo(id);
+  getTodo = (id: string) => this.#todosResource.getTodo(id)
 
   completeAll = async (isCompleted: boolean) =>
-    await this.#todosResource.completeAll(isCompleted);
+    await this.#todosResource.completeAll(isCompleted)
 
-  clearCompleted = async () => await this.#todosResource.clearCompleted();
+  clearCompleted = async () => await this.#todosResource.clearCompleted()
 
-  saveTodo = async (todo: Todo) => await this.#todosResource.saveTodo(todo);
+  saveTodo = async (todo: Todo) => await this.#todosResource.saveTodo(todo)
 
-  deleteTodo = async (id: string) => await this.#todosResource.deleteTodo(id);
+  deleteTodo = async (id: string) => await this.#todosResource.deleteTodo(id)
 }

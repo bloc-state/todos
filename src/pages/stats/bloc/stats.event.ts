@@ -1,4 +1,4 @@
-import { BlocEvent } from "@bloc-state/bloc";
+import { BlocEvent } from "@bloc-state/bloc"
 
 export abstract class StatsEvent extends BlocEvent {}
 

@@ -1,12 +1,9 @@
-import { Fab, AppBar, Toolbar, IconButton } from "@mui/material";
-import MenuIcon from "@mui/icons-material/menu";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
-import { Outlet, useNavigate } from "react-router-dom";
-import AddIcon from "@mui/icons-material/Add";
-
+import { Fab, AppBar, Toolbar, IconButton } from "@mui/material"
+import Icon from "@mui/material/Icon"
+import { Outlet, useNavigate } from "react-router-dom"
 
 export default function Homepage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <>
@@ -24,13 +21,13 @@ export default function Homepage() {
           <IconButton
             color="inherit"
             onClick={() => {
-              navigate("/");
+              navigate("/")
             }}
           >
-            <MenuIcon />
+            <Icon>menu</Icon>
           </IconButton>
           <IconButton color="inherit" onClick={() => navigate("/stats")}>
-            <ShowChartIcon />
+            <Icon>show_chart</Icon>
           </IconButton>
         </Toolbar>
         <Fab
@@ -45,9 +42,9 @@ export default function Homepage() {
             margin: "0 auto",
           }}
         >
-          <AddIcon />
+          <Icon>add</Icon>
         </Fab>
       </AppBar>
     </>
-  );
+  )
 }

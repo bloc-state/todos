@@ -1,14 +1,13 @@
-import { State } from "@bloc-state/state";
-import { EditTodoViewModel } from "../model/edit-todo.model";
-
+import { State } from "@bloc-state/state"
+import { EditTodoViewModel } from "../model/edit-todo.model"
 
 export class EditTodoState extends State<EditTodoViewModel> {
-	submitSuccess = false
+  submitSuccess = false
 
-	constructor () {
-		super( {
-			title: "",
-			description: ""
-		})
-	}
+  constructor() {
+    super({
+      title: "",
+      description: "",
+    })
+  }
 }

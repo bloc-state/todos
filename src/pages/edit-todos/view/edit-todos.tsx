@@ -7,61 +7,55 @@ import {
   IconButton,
   Box,
   Typography,
-} from "@mui/material";
-import { BlocListener, BlocProvider, useBloc} from "@bloc-state/react-bloc"
-import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
-import { useForm, Controller } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
-import { EditTodoBloc } from "../bloc/edit-todo.bloc";
+} from "@mui/material"
+import { BlocListener, BlocProvider, useBloc } from "@bloc-state/react-bloc"
+import { useForm, Controller } from "react-hook-form"
+import { useNavigate, useParams } from "react-router-dom"
+import { EditTodoBloc } from "../bloc/edit-todo.bloc"
 import {
   EditTodoDescriptionChanged,
   EditTodoSubmitted,
   EditTodoSubscribed,
   EditTodoTitleChanged,
-} from "../bloc/edit-todo.event";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+} from "../bloc/edit-todo.event"
+import Icon from "@mui/material/Icon"
 
 export default function EditTodoPage() {
-  const { todoId } = useParams();
+  const { todoId } = useParams()
 
   return (
     <BlocProvider
       bloc={[EditTodoBloc]}
       onCreate={(get) => {
-        if (todoId) get(EditTodoBloc).add(new EditTodoSubscribed(todoId));
+        if (todoId) get(EditTodoBloc).add(new EditTodoSubscribed(todoId))
       }}
     >
       <EditTodoView isNew={todoId === undefined} />
     </BlocProvider>
-  );
+  )
 }
 
 export type EditTodoViewProps = {
-  isNew: boolean;
-};
+  isNew: boolean
+}
 
 export function EditTodoView({ isNew }: EditTodoViewProps) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [[title, description], { add }] = useBloc(EditTodoBloc, {
     selector: ({ title, description }) => [title, description],
-  });
+  })
 
-  const { control, handleSubmit } = useForm({
-    defaultValues: {
-      title,
-      description,
-    },
-  });
+  const { control, handleSubmit } = useForm()
 
-  const onSubmit = (data: any) => add(new EditTodoSubmitted());
+  const onSubmit = (data: any) => add(new EditTodoSubmitted())
 
   return (
     <BlocListener
       bloc={EditTodoBloc}
       listenWhen={(previous, current) => current.submitSuccess}
       listener={(get, state) => {
-        navigate("/");
+        navigate("/")
       }}
     >
       <Container
@@ -78,7 +72,7 @@ export function EditTodoView({ isNew }: EditTodoViewProps) {
           <Toolbar>
             <Box sx={{ flex: 1 }}>
               <IconButton color="inherit" onClick={() => navigate("/")}>
-                <ArrowBackIcon />
+                <Icon>arrow_back</Icon>
               </IconButton>
             </Box>
             <Typography
@@ -112,13 +106,13 @@ export function EditTodoView({ isNew }: EditTodoViewProps) {
                   variant="standard"
                   id="title"
                   label="title"
-                  value={value}
+                  value={title}
                   onChange={(event) => {
-                    onChange(event);
-                    add(new EditTodoTitleChanged(event.target.value));
+                    onChange(event)
+                    add(new EditTodoTitleChanged(event.target.value))
                   }}
                 />
-              );
+              )
             }}
           />
           <Controller
@@ -140,13 +134,13 @@ export function EditTodoView({ isNew }: EditTodoViewProps) {
                 variant="standard"
                 id="description"
                 label="description"
-                value={value}
+                value={description}
                 multiline
                 rows={10}
                 margin="dense"
                 onChange={(event) => {
-                  onChange(event);
-                  add(new EditTodoDescriptionChanged(event.target.value));
+                  onChange(event)
+                  add(new EditTodoDescriptionChanged(event.target.value))
                 }}
               />
             )}
@@ -163,8 +157,8 @@ export function EditTodoView({ isNew }: EditTodoViewProps) {
           right: (theme) => theme.spacing(2),
         }}
       >
-        <CheckRoundedIcon />
+        <Icon>check_rounded</Icon>
       </Fab>
     </BlocListener>
-  );
+  )
 }

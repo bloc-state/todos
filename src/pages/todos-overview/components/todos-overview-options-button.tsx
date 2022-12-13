@@ -1,13 +1,17 @@
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
-import { TodosOverviewBloc, TodosOverviewClearCompletedRequested, TodosOverviewToggleAllRequested } from "../bloc";
-import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
-import { useBloc } from "@bloc-state/react-bloc";
+import { IconButton, Menu, MenuItem } from "@mui/material"
+import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
+import {
+  TodosOverviewBloc,
+  TodosOverviewClearCompletedRequested,
+  TodosOverviewToggleAllRequested,
+} from "../bloc"
+import Icon from "@mui/material/Icon"
+import { useBloc } from "@bloc-state/react-bloc"
 
 export function TodosOverviewOptionsButton() {
-  const [ todos , { add } ] = useBloc( TodosOverviewBloc, {
-    selector: (data) => data.todos
-  });
+  const [todos, { add }] = useBloc(TodosOverviewBloc, {
+    selector: (data) => data.todos,
+  })
 
   const hasTodos = todos.length > 0
   const completedTodosAmount = todos.filter((todo) => todo.isCompleted).length
@@ -17,25 +21,28 @@ export function TodosOverviewOptionsButton() {
       {(popupState) => (
         <>
           <IconButton color="inherit" {...bindTrigger(popupState)}>
-            <MoreVertRoundedIcon />
+            <Icon>more_vert_rounded</Icon>
           </IconButton>
           <Menu {...bindMenu(popupState)}>
             <MenuItem
               key="toggleAll"
-              disabled={!(hasTodos)}
+              disabled={!hasTodos}
               onClick={() => {
-                add(new TodosOverviewToggleAllRequested());
-                popupState.close();
+                add(new TodosOverviewToggleAllRequested())
+                popupState.close()
               }}
             >
-              Mark all as {completedTodosAmount === todos.length ? "incomplete" : "complete"}
+              Mark all as{" "}
+              {completedTodosAmount === todos.length
+                ? "incomplete"
+                : "complete"}
             </MenuItem>
             <MenuItem
               key="clearCompleted"
               disabled={!(hasTodos && completedTodosAmount > 0)}
               onClick={() => {
-                add(new TodosOverviewClearCompletedRequested());
-                popupState.close();
+                add(new TodosOverviewClearCompletedRequested())
+                popupState.close()
               }}
             >
               Clear completed
@@ -44,5 +51,5 @@ export function TodosOverviewOptionsButton() {
         </>
       )}
     </PopupState>
-  );
+  )
 }

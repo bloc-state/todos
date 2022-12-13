@@ -1,58 +1,61 @@
-import { ObservableResource } from "../../../modules-common/observable-resource";
-import { Todo } from "../../domain";
-import { TodosResource } from "./todos-resource";
+import { ObservableResource } from "../../../modules-common/observable-resource"
+import { Todo } from "../../domain"
+import { TodosResource } from "./todos-resource"
 
-export class LocalStorageTodosResource extends ObservableResource<Todo[]> implements TodosResource {
+export class LocalStorageTodosResource
+  extends ObservableResource<Todo[]>
+  implements TodosResource
+{
   constructor() {
-    super([]);
-    this.init();
+    super([])
+    this.init()
   }
 
   init() {
-    const todos = localStorage.getItem("todos");
+    const todos = localStorage.getItem("todos")
     if (todos != null) {
-      this.emit(JSON.parse(todos));
+      this.emit(JSON.parse(todos))
     }
   }
 
-  getTodo = async ( id: string ) => {
+  getTodo = async (id: string) => {
     const todo = this.state.find((todo) => todo.id === id)
 
-    if ( !todo ) {
+    if (!todo) {
       throw new TodoNotFoundException()
     }
 
     return todo
-  } 
+  }
 
-  getTodos = () => this.state$;
+  getTodos = () => this.state$
 
   saveTodo = async (todo: Todo) => {
-    const todos = [...this.state];
-		const id = todo.id
-    const todoIndex = todos.findIndex((todo) => todo.id === id);
+    const todos = [...this.state]
+    const id = todo.id
+    const todoIndex = todos.findIndex((todo) => todo.id === id)
     if (todoIndex >= 0) {
-      todos[todoIndex] = todo;
+      todos[todoIndex] = todo
     } else {
-      todos.push(todo);
+      todos.push(todo)
     }
-    this.emit(todos);
-    return localStorage.setItem("todos", JSON.stringify(todos));
-  };
+    this.emit(todos)
+    return localStorage.setItem("todos", JSON.stringify(todos))
+  }
 
   deleteTodo = async (id: string) => {
-    const todos = [...this.state];
-    const todoIndex = todos.findIndex((todo) => todo.id === id);
+    const todos = [...this.state]
+    const todoIndex = todos.findIndex((todo) => todo.id === id)
     if (todoIndex === -1) {
-      throw new TodoNotFoundException();
+      throw new TodoNotFoundException()
     } else {
-      todos.splice(todoIndex, 1);
-      this.emit(todos);
-      return localStorage.setItem("todos", JSON.stringify(todos));
+      todos.splice(todoIndex, 1)
+      this.emit(todos)
+      return localStorage.setItem("todos", JSON.stringify(todos))
     }
-  };
+  }
 
-  async clearCompleted () {
+  async clearCompleted() {
     const todos = [...this.state]
     const completedTodosAmount = todos.filter((todo) => todo.isCompleted).length
     const newTodos = todos.filter((todo) => !todo.isCompleted)
@@ -61,15 +64,16 @@ export class LocalStorageTodosResource extends ObservableResource<Todo[]> implem
     return completedTodosAmount
   }
 
-  async completeAll ( isCompleted: boolean ) {
+  async completeAll(isCompleted: boolean) {
     const todos = [...this.state]
-    const changedTodosAmount = todos.filter((todo) => todo.isCompleted !== isCompleted).length
-    const newTodos = todos.map((todo) => ({...todo, isCompleted}))
+    const changedTodosAmount = todos.filter(
+      (todo) => todo.isCompleted !== isCompleted,
+    ).length
+    const newTodos = todos.map((todo) => ({ ...todo, isCompleted }))
     this.emit(newTodos)
     await localStorage.setItem("todos", JSON.stringify(newTodos))
     return changedTodosAmount
-  };
-
+  }
 }
 
 export class TodoNotFoundException extends Error {}

@@ -5,38 +5,37 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-	Typography,
-} from "@mui/material";
-import { StatsBloc } from "../bloc/stats.bloc";
-import { StatsSubscriptionRequested } from "../bloc/stats.event";
-import CheckIcon from "@mui/icons-material/Check";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import Grid from "@mui/material/Unstable_Grid2";
-import { BlocProvider, useBlocValue } from "@bloc-state/react-bloc";
+  Typography,
+} from "@mui/material"
+import Icon from "@mui/material/Icon"
+import { StatsBloc } from "../bloc/stats.bloc"
+import { StatsSubscriptionRequested } from "../bloc/stats.event"
+import Grid from "@mui/material/Unstable_Grid2"
+import { BlocProvider, useBlocValue } from "@bloc-state/react-bloc"
 
 export default function StatsPage() {
   return (
     <BlocProvider
       bloc={[StatsBloc]}
       onCreate={(get) => {
-        get(StatsBloc).add(new StatsSubscriptionRequested());
+        get(StatsBloc).add(new StatsSubscriptionRequested())
       }}
     >
       <StatsView />
     </BlocProvider>
-  );
+  )
 }
 
 export function StatsView() {
-  const state = useBlocValue(StatsBloc);
-  const { activeTodos, completedTodos } = state.data;
+  const state = useBlocValue(StatsBloc)
+  const { activeTodos, completedTodos } = state.data
 
   return (
     <>
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						Stats
+            Stats
           </Typography>
         </Toolbar>
       </AppBar>
@@ -48,15 +47,17 @@ export function StatsView() {
       >
         <Grid>
           <List>
-            <ListItem secondaryAction={<ListItemText primary={completedTodos} />}>
+            <ListItem
+              secondaryAction={<ListItemText primary={completedTodos} />}
+            >
               <ListItemIcon>
-                <CheckIcon />
+                <Icon>check</Icon>
               </ListItemIcon>
               <ListItemText primary={"Completed todos"} />
             </ListItem>
             <ListItem secondaryAction={<ListItemText primary={activeTodos} />}>
               <ListItemIcon>
-                <RadioButtonUncheckedIcon />
+                <Icon>radio_button_unchecked</Icon>
               </ListItemIcon>
               <ListItemText primary={"Active todos"} />
             </ListItem>
@@ -64,5 +65,5 @@ export function StatsView() {
         </Grid>
       </Grid>
     </>
-  );
+  )
 }

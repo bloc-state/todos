@@ -1,25 +1,25 @@
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
-import { TodosOverviewBloc, TodosOverviewFilterChanged } from "../bloc";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { useBlocInstance } from "@bloc-state/react-bloc";
+import { IconButton, Menu, MenuItem } from "@mui/material"
+import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state"
+import { TodosOverviewBloc, TodosOverviewFilterChanged } from "../bloc"
+import Icon from "@mui/material/Icon"
+import { useBlocInstance } from "@bloc-state/react-bloc"
 
 export function TodosOverviewFilterButton() {
-  const { add } = useBlocInstance(TodosOverviewBloc);
+  const { add } = useBlocInstance(TodosOverviewBloc)
 
   return (
     <PopupState variant="popover" popupId="todos-overview-filter-menu">
       {(popupState) => (
         <>
           <IconButton color="inherit" {...bindTrigger(popupState)}>
-            <FilterListIcon />
+            <Icon>filter_list</Icon>
           </IconButton>
           <Menu {...bindMenu(popupState)}>
             <MenuItem
               key="filterChangedAll"
               onClick={() => {
-                add(new TodosOverviewFilterChanged("all"));
-                popupState.close();
+                add(new TodosOverviewFilterChanged("all"))
+                popupState.close()
               }}
             >
               All
@@ -27,8 +27,8 @@ export function TodosOverviewFilterButton() {
             <MenuItem
               key="filterChangedIncomplted"
               onClick={() => {
-                add(new TodosOverviewFilterChanged("incompleted"));
-                popupState.close();
+                add(new TodosOverviewFilterChanged("incompleted"))
+                popupState.close()
               }}
             >
               Active only
@@ -36,8 +36,8 @@ export function TodosOverviewFilterButton() {
             <MenuItem
               key="filterChangedCompleted"
               onClick={() => {
-                add(new TodosOverviewFilterChanged("completed"));
-                popupState.close();
+                add(new TodosOverviewFilterChanged("completed"))
+                popupState.close()
               }}
             >
               Completed only
@@ -46,5 +46,5 @@ export function TodosOverviewFilterButton() {
         </>
       )}
     </PopupState>
-  );
+  )
 }

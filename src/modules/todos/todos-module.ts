@@ -1,6 +1,6 @@
-import { AwilixContainer, asClass } from "awilix";
-import { TodosRepositoryImpl } from "./data";
-import { LocalStorageTodosResource } from "./data/resource";
+import { AwilixContainer, asClass } from "awilix"
+import { TodosRepositoryImpl } from "./data"
+import { LocalStorageTodosResource } from "./data/resource"
 
 export function TodosModule(container: AwilixContainer) {
   container.register({
@@ -8,5 +8,5 @@ export function TodosModule(container: AwilixContainer) {
       .disposer((resource) => resource.close())
       .singleton(),
     todosRepository: asClass(TodosRepositoryImpl).scoped(),
-  });
+  })
 }
