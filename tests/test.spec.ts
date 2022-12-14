@@ -1,5 +1,3 @@
-export {}
-
 describe("test", () => {
   const test = "test"
   it("should run tests", () => {
