@@ -28,7 +28,7 @@ specifiers:
   jest: ^29.3.1
   jest-environment-jsdom: ^29.3.1
   lint-staged: ^13.1.0
-  material-ui-popup-state: ^4.1.0
+  material-ui-popup-state: ^5.0.0
   nanoid: ^4.0.0
   prettier: ^2.8.1
   react: ^18.2.0
@@ -52,7 +52,7 @@ dependencies:
   '@emotion/styled': 11.10.5_5tjec44ezuvlpkchcqgxkxryqi
   '@mui/material': 5.10.16_thp4wrxo45nyllusrnt46mid4u
   awilix: 8.0.0
-  material-ui-popup-state: 4.1.0_thp4wrxo45nyllusrnt46mid4u
+  material-ui-popup-state: 5.0.3_thp4wrxo45nyllusrnt46mid4u
   nanoid: 4.0.0
   react: 18.2.0
   react-custom-scrollbars: 4.2.1_biqbaboplfbrettd7655fr4n2y
@@ -4607,10 +4607,10 @@ packages:
     hasBin: true
     dev: true
 
-  /material-ui-popup-state/4.1.0_thp4wrxo45nyllusrnt46mid4u:
-    resolution: {integrity: sha512-YAxLT10XALsUuuo46sc81NKD6oKJzlkcKP3e+IqC0pKwzAhOAZIQ+RUHXT6Mz3bXHKoHCsM+NdIQxR4mOH/KEQ==}
+  /material-ui-popup-state/5.0.3_thp4wrxo45nyllusrnt46mid4u:
+    resolution: {integrity: sha512-AdlAEDmOAQ3BZMnNfyKD5CL+aNMb8zd5tDZWG5Ykx3vcuPbaL6SPjJ5kWuWXrJvapL9I8wwxaYhV4gt3tZmyOA==}
     peerDependencies:
-      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.20.6
       '@mui/material': 5.10.16_thp4wrxo45nyllusrnt46mid4u
