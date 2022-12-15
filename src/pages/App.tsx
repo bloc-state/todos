@@ -1,7 +1,6 @@
 import { AppBar, createTheme, ThemeProvider, Toolbar } from "@mui/material"
 import CssBaseline from "@mui/material/CssBaseline"
 import { Route, Routes } from "react-router-dom"
-import { Scrollbars } from "react-custom-scrollbars"
 import { lazy, Suspense } from "react"
 import CircularLoader from "./pages-common/components/circular-loader"
 
@@ -22,22 +21,20 @@ export default function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Scrollbars>
-        <Suspense fallback={<CircularLoader />}>
-          <Routes>
-            <Route path="/" element={<HomePage />}>
-              <Route index element={<TodosOverviewPage />} />
-              <Route path="stats">
-                <Route index element={<StatsPage />} />
-              </Route>
+      <Suspense fallback={<CircularLoader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />}>
+            <Route index element={<TodosOverviewPage />} />
+            <Route path="stats">
+              <Route index element={<StatsPage />} />
             </Route>
-            <Route path="edit" element={<EditTodoPage />}>
-              <Route index path=":todoId" />
-            </Route>
-          </Routes>
-          <AppBarPlaceHolder />
-        </Suspense>
-      </Scrollbars>
+          </Route>
+          <Route path="edit" element={<EditTodoPage />}>
+            <Route index path=":todoId" />
+          </Route>
+        </Routes>
+        <AppBarPlaceHolder />
+      </Suspense>
     </ThemeProvider>
   )
 }
