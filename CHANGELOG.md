@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/bloc-state/todos/compare/v1.0.1...v1.0.2) (2022-12-17)
+
+
+### Bug Fixes
+
+* **EditTodoView:** provide default values for useForm ([0b827f9](https://github.com/bloc-state/todos/commit/0b827f99cea25deb91e9ee8ccd1340661b8d08ba))
+
 ## [1.0.1](https://github.com/bloc-state/todos/compare/v1.0.0...v1.0.1) (2022-12-17)
 
 
