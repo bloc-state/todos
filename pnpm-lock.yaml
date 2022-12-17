@@ -5,7 +5,7 @@ specifiers:
   '@babel/preset-react': ^7.18.6
   '@babel/preset-typescript': ^7.18.6
   '@bloc-state/bloc': ^2.0.2
-  '@bloc-state/react-bloc': ^3.0.0
+  '@bloc-state/react-bloc': ^3.1.0
   '@bloc-state/state': ^2.1.4
   '@commitlint/cli': ^17.3.0
   '@commitlint/config-conventional': ^17.3.0
@@ -45,7 +45,7 @@ specifiers:
 
 dependencies:
   '@bloc-state/bloc': 2.0.2_rxjs@7.5.7
-  '@bloc-state/react-bloc': 3.0.0_wfxntqxygqbm6oqsoy6oblmmde
+  '@bloc-state/react-bloc': 3.1.0_wfxntqxygqbm6oqsoy6oblmmde
   '@bloc-state/state': 2.1.4
   '@emotion/react': 11.10.5_hebjedjhazelsvuzebr6t7ng24
   '@emotion/styled': 11.10.5_5tjec44ezuvlpkchcqgxkxryqi
@@ -583,8 +583,8 @@ packages:
       rxjs: 7.5.7
     dev: false
 
-  /@bloc-state/react-bloc/3.0.0_wfxntqxygqbm6oqsoy6oblmmde:
-    resolution: {integrity: sha512-VKi03zfVlIPMnd6GVH/STVXU/QVbbM3/kM+0p/NufVPm7h3OtxT/TAPnkNMpktSKFExp7ylFwN5wPGpZzeEzWA==}
+  /@bloc-state/react-bloc/3.1.0_wfxntqxygqbm6oqsoy6oblmmde:
+    resolution: {integrity: sha512-SilNq8S5/g0euTiiaqbdx3SQ4HjZYw8gH2xxwvdqlmchA2v0y3QbILVpnl3OjGemesc52fp0B02ZO2a9Ov1Rmg==}
     peerDependencies:
       '@bloc-state/bloc': ^2.0.1
       '@bloc-state/state': ^2.1.2
