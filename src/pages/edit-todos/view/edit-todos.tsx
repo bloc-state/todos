@@ -46,7 +46,12 @@ export function EditTodoView({ isNew }: EditTodoViewProps) {
     selector: ({ title, description }) => [title, description],
   })
 
-  const { control, handleSubmit } = useForm()
+  const { control, handleSubmit } = useForm( {
+    defaultValues: {
+      title,
+      description
+    }
+  })
 
   const onSubmit = (data: any) => add(new EditTodoSubmitted())
 
