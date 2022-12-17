@@ -40,7 +40,7 @@ export class TodosOverviewBloc extends Bloc<
     this.on(TodosOverviewUndoDeletionRequested, this.onUndoDeletionRequsted)
   }
 
-  async onUndoDeletionRequsted(
+  private async onUndoDeletionRequsted(
     event: TodosOverviewUndoDeletionRequested,
     emit: Emitter<TodosOverviewState>,
   ) {
@@ -58,7 +58,7 @@ export class TodosOverviewBloc extends Bloc<
     )
   }
 
-  async onTodoDeleted(
+  private async onTodoDeleted(
     event: TodosOverviewTodoDeleted,
     emit: Emitter<TodosOverviewState>,
   ) {
@@ -70,14 +70,14 @@ export class TodosOverviewBloc extends Bloc<
     )
   }
 
-  async onClearCompletedRequested(
+  private async onClearCompletedRequested(
     event: TodosOverviewClearCompletedRequested,
     emit: Emitter<TodosOverviewState>,
   ) {
     await this.#todosRepository.clearCompleted()
   }
 
-  async onToggleAllRequested(
+  private async onToggleAllRequested(
     event: TodosOverviewToggleAllRequested,
     emit: Emitter<TodosOverviewState>,
   ): Promise<void> {
@@ -87,7 +87,7 @@ export class TodosOverviewBloc extends Bloc<
     await this.#todosRepository.completeAll(!areAllCompleted)
   }
 
-  onFilterChanged(
+  private onFilterChanged(
     event: TodosOverviewFilterChanged,
     emit: Emitter<TodosOverviewState>,
   ) {
@@ -98,7 +98,7 @@ export class TodosOverviewBloc extends Bloc<
     )
   }
 
-  async onSubscriptionRequested(
+  private async onSubscriptionRequested(
     event: TodosOverviewSubscriptionRequested,
     emit: Emitter<TodosOverviewState>,
   ) {
@@ -115,15 +115,11 @@ export class TodosOverviewBloc extends Bloc<
     )
   }
 
-  async onTodoCompletionToggled(
+  private async onTodoCompletionToggled(
     event: TodosOverviewTodoCompletionToggled,
     emit: Emitter<TodosOverviewState>,
   ) {
     const todo = { ...event.todo, isCompleted: event.isCompleted }
     await this.#todosRepository.saveTodo(todo)
-  }
-
-  dispose(): void | Promise<void> {
-    this.close()
   }
 }
