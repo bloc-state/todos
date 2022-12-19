@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@bloc-state/bloc": "^2.0.2",
-    "@bloc-state/react-bloc": "^3.1.0",
+    "@bloc-state/react-bloc": "^4.0.0",
     "@bloc-state/state": "^2.1.4",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
