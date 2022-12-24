@@ -50,7 +50,6 @@ export function TodosOverviewView() {
   const [filteredTodos, { add }] = useBloc(TodosOverviewBloc, {
     selector: ({ todos, filter }) =>
       todos.filter((todo) => todoFilterMap(todo, filter)),
-    suspend: false,
   })
 
   const navigate = useNavigate()
