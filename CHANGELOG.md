@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/bloc-state/todos/compare/v1.0.2...v1.0.3) (2022-12-24)
+
+
+### Bug Fixes
+
+* **TodosOverView:** removed suspend argument ([ea444ed](https://github.com/bloc-state/todos/commit/ea444ed40c8d63b9dd6755281dfc7a16a0f3d7ff))
+
 ## [1.0.2](https://github.com/bloc-state/todos/compare/v1.0.1...v1.0.2) (2022-12-17)
 
 
